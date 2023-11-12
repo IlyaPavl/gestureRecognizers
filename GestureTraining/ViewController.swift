@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private let zView = UIView()
+    private let zView = newView()
     
     private let viewTapGestureRecognizer = UITapGestureRecognizer()
     
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addGestureRecognizer(viewTapGestureRecognizer)
-
+        
         setupZView()
         setupGestureReconizers()
     }
@@ -55,6 +55,8 @@ extension ViewController {
         pinchGestureRecognizer.addTarget(self, action: #selector(handlePinchGesture(_:)))
         zTapGestureRecognizer.addTarget(self, action: #selector(handleTapGesture(_:)))
         longPressGestureRecognizer.addTarget(self, action: #selector(handleLongpressGesture(_:)))
+        
+        zTapGestureRecognizer.delegate = self
         
         viewTapGestureRecognizer.addTarget(self, action: #selector(handleViewTapGesture(_:)))
     }
@@ -93,20 +95,16 @@ extension ViewController {
                 self.zView.layer.cornerRadius = newCornerRadius
             }
         }
+        handleTapGesture(gestureRecognizer)
     }
     
     @objc func handleViewTapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
-
+        
         print("view tapped")
     }
     
     private func scaleZView() {
         zView.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        
     }
 }
 
@@ -117,3 +115,10 @@ extension ViewController: UIGestureRecognizerDelegate {
     }
 }
 
+
+class newView: UIView {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        print("touched")
+    }
+}
