@@ -55,10 +55,11 @@ extension ViewController {
         pinchGestureRecognizer.addTarget(self, action: #selector(handlePinchGesture(_:)))
         zTapGestureRecognizer.addTarget(self, action: #selector(handleTapGesture(_:)))
         longPressGestureRecognizer.addTarget(self, action: #selector(handleLongpressGesture(_:)))
+                
+        viewTapGestureRecognizer.addTarget(self, action: #selector(handleViewTapGesture(_:)))
         
         zTapGestureRecognizer.delegate = self
-        
-        viewTapGestureRecognizer.addTarget(self, action: #selector(handleViewTapGesture(_:)))
+        viewTapGestureRecognizer.cancelsTouchesInView = false
     }
     
     @objc private func handlePinchGesture(_ gestureRecognizer: UIPinchGestureRecognizer) {
@@ -95,12 +96,11 @@ extension ViewController {
                 self.zView.layer.cornerRadius = newCornerRadius
             }
         }
-        handleTapGesture(gestureRecognizer)
     }
     
     @objc func handleViewTapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
         
-        print("view tapped")
+        print("main view tapped")
     }
     
     private func scaleZView() {
@@ -110,15 +110,25 @@ extension ViewController {
 
 extension ViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        let severalGestures = [pinchGestureRecognizer, zTapGestureRecognizer, longPressGestureRecognizer]
-        return severalGestures.contains(gestureRecognizer) && severalGestures.contains(otherGestureRecognizer)
+        return true
     }
 }
 
 
 class newView: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        print("touched")
+        super.touchesBegan(touches, with: event)
+        print("zView touch began")
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        print("zView touch cancelled")
+
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        print("zView touch ended")
     }
 }
