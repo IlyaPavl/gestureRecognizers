@@ -55,10 +55,11 @@ extension ViewController {
         pinchGestureRecognizer.addTarget(self, action: #selector(handlePinchGesture(_:)))
         zTapGestureRecognizer.addTarget(self, action: #selector(handleTapGesture(_:)))
         longPressGestureRecognizer.addTarget(self, action: #selector(handleLongpressGesture(_:)))
-                
+        
         viewTapGestureRecognizer.addTarget(self, action: #selector(handleViewTapGesture(_:)))
         
         zTapGestureRecognizer.delegate = self
+        zTapGestureRecognizer.cancelsTouchesInView = false
         viewTapGestureRecognizer.cancelsTouchesInView = false
     }
     
@@ -124,7 +125,7 @@ class newView: UIView {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
         print("zView touch cancelled")
-
+        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
