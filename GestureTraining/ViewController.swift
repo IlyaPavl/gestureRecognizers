@@ -44,7 +44,7 @@ extension ViewController {
         zView.center = view.center
         view.addSubview(zView)
         
-        zView.backgroundColor = .gray
+        zView.backgroundColor = .purple
         
         zView.addGestureRecognizer(pinchGestureRecognizer)
         zView.addGestureRecognizer(zTapGestureRecognizer)
