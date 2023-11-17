@@ -110,6 +110,7 @@ extension ViewController {
     private func scaleZView() {
         zView.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
         print("scaled")
+        print(" ")
     }
 }
 
