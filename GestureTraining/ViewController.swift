@@ -89,6 +89,7 @@ extension ViewController {
     @objc private func handleTapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
         zView.backgroundColor = UIColor(red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: 1.0)
         print("color changed")
+        print(" ")
     }
     
     @objc private func handleLongpressGesture(_ gestureRecognizer: UITapGestureRecognizer) {
